@@ -1,23 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: zipkin
   namespace: distribuidos  
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: frontend
+      app: zipkin
   template:
     metadata:
       labels:
-        app: frontend
+        app: zipkin
     spec:
       containers:
-      - name: frontend
-        image: luis486/frontend:latest  # Cambia a tu imagen y etiqueta específicas
+      - name: zipkin
+        image: openzipkin/zipkin:latest # Cambia a tu imagen y etiqueta específicas
         ports:
-        - containerPort: 8080
-
-
-        
+        - containerPort: 9411

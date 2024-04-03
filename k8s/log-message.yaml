@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-message-deployment
+  name: log-message
   namespace: distribuidos  
 spec:
   replicas: 2

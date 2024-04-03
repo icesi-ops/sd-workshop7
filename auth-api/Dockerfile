@@ -11,7 +11,4 @@ RUN go build
 EXPOSE 8000
 
 # Set environment variables
-ENV JWT_SECRET=PRFT
-ENV AUTH_API_PORT=8000
-ENV USERS_API_ADDRESS=http://127.0.0.1:8083
 CMD ["./auth-api"]

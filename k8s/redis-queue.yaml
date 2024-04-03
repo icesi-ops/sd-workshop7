@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-queue-deployment
+  name: redis-queue
   namespace: distribuidos  
 spec:
   replicas: 2
