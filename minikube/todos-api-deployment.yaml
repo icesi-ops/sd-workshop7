@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: todos-api
+  template:
+    metadata:
+      labels:
+        app: todos-api
+    spec:
+      containers:
+      - name: todos-api
+        image: ventana1901/todos-api:v1
+        ports:
+        - containerPort: 8082
