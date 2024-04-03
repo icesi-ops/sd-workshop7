@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth-api
+  template:
+    metadata:
+      labels:
+        app: auth-api
+    spec:
+      containers:
+      - name: auth-api
+        image: ventana1901/auth-api:v1
+        ports:
+        - containerPort: 8000
+        env:
+        - name: ZIPKIN_URL
+          value: "http://zipkin:9411/api/v2/spans"
+        - name: JWT_SECRET
+          value: "PRFT"
+        - name: USERS_API_ADDRESS
+          value: "http://users-api:8083"
+        - name: AUTH_API_PORT
+          value: "8000"
