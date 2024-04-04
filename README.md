@@ -48,38 +48,38 @@ kubectl apply -f kubernetes/redis.yaml
   kubectl get deployments
 ```
 <p align="left">
-  <img src="images/imagen1.JPG" alt="Image 1">
+  <img src="images/imagen1.jpg" alt="Image 1">
 </p
 
 ```
   kubectl get pods
 ```
 <p align="left">
-  <img src="images/imagen2.JPG" alt="Image 2">
+  <img src="images/imagen2.jpg" alt="Image 2">
 </p
 
 ```
   kubectl get services
 ```
 <p align="left">
-  <img src="images/imagen3.JPG" alt="Image 3">
+  <img src="images/imagen3.jpg" alt="Image 3">
 </p
 
 In this way we have our microservices running correctly in the kubernetes cluster, now let's check that everything is working correctly:
 
 log in with the credentials 'admin' and 'admin':
 <p align="left">
-  <img src="images/imagen4.JPG" alt="Image 4">
+  <img src="images/imagen4.jpg" alt="Image 4">
 </p
 
 Now, we have the following interface, we write a text in the empty field and push add todo:
 <p align="left">
-  <img src="images/imagen5.JPG" alt="Image 5">
+  <img src="images/imagen5.jpg" alt="Image 5">
 </p
 
 We text is add in the interface:
 <p align="left">
-  <img src="images/imagen6.png" alt="Image 6">
+  <img src="images/imagen6.jpg" alt="Image 6">
 </p
 
 that would be the whole process in this case, clearly all this can be modified much more depending on the context.
