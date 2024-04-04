@@ -4,14 +4,15 @@
 
 ### Team
 
-
 * Nicolás Gómez 
 * Luis Murcia
 
 ### Suggested technologies 
-* Docker
+* WSL
+* Ubuntu
+* Docker Desktop
 * Kubernetes
-* Redis
+  
 # Code:
 First of all we created a deployment for each microservice needed for this app to work.
 
@@ -47,8 +48,15 @@ spec:
 Then, we created a namespace to visualize the microservices
 Finally we apply this code for each yaml file:
 ```
-kubectl -n distribuidos apply -f
+example: kubectl -n distribuidos apply -f frontend
 ```
+
+#### Note: 
+
+Because we have been using Docker desktop and didn't install minikube, we need to port forward from the local machine to a virtual environment with this code
+
+In this case the frontend service
+kubectl -n distribuidos port-forward *name-pod* 8888:8080
 
 # Service cluster:
 <img src="assets/Cluster.jpg"><br>
