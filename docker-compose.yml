@@ -1,0 +1,43 @@
+services:
+  redis-logger:
+    image: "redis:alpine" 
+    ports:
+      - "6379:6379"
+    container_name: redis-logger
+  todos-api:
+    build: ./todos-api
+    image: alexjr2002/microservices-app-todos-api
+    ports:
+      - "8082:8082"
+    depends_on:
+      - redis-logger
+    container_name: todos-api
+  users-api:
+    build: ./users-api
+    image: alexjr2002/microservices-app-users-api
+    ports:
+      - "8083:8083"
+    container_name: users-api
+  auth-api:
+    build: ./auth-api
+    image: alexjr2002/microservices-app-auth-api
+    ports:
+      - "9000:9000"
+    depends_on:
+      - users-api
+    container_name: auth-api
+  frontend:
+    build: ./frontend
+    image: alexjr2002/microservices-app-frontend
+    ports:
+      - "8089:8089"
+    depends_on:
+      - auth-api
+      - todos-api
+    container_name: frontend
+  logger:
+    build: ./log-message-processor
+    image: alexjr2002/microservices-app-logger
+    depends_on:
+      - redis-logger
+    container_name: logger
