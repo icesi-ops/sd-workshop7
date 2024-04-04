@@ -44,25 +44,27 @@ kubectl apply -f kubernetes/users-api.yaml
 kubectl apply -f kubernetes/redis.yaml
 ```
 4. Verify that the deployment, pods and services are running correctly.
-```
+```bash
   kubectl get deployments
 ```
 <p align="left">
   <img src="images/imagen1.jpg" alt="Image 1">
 </p
 
-```
+```bash
   kubectl get pods
-
 ```
+
+  
 <p align="left">
   <img src="images/imagen2.jpg" alt="Image 2">
 </p
 
-```
+```bash
   kubectl get services
-
 ```
+
+
 <p align="left">
   <img src="images/imagen3.jpg" alt="Image 3">
 </p
