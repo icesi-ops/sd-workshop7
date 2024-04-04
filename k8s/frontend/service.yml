@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: microservice-app-example
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: frontend-port
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
