@@ -65,6 +65,10 @@ To run this application, you should follow these steps:
 
 * If you are not using Minikube, you need to use the command `kubectl port-forward service/"service-name" machine_port:cluster_port`. When you execute this command, you're creating a network tunnel from your local machine to the specified service within your Kubernetes cluster. This allows you to access the service as if it were running locally on your machine, using the specified local port (8888 in this case).
 
+* To delete the entire deployment, you need to use the command `kubectl delete -f "file.yml"`
+
+* To stop the Minikube node, you use the command `minikube stop`
+
 ## App Running
 
 ![services](assets/app_login.png)
