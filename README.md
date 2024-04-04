@@ -53,6 +53,7 @@ kubectl apply -f kubernetes/redis.yaml
 
 ```
   kubectl get pods
+
 ```
 <p align="left">
   <img src="images/imagen2.jpg" alt="Image 2">
@@ -60,6 +61,7 @@ kubectl apply -f kubernetes/redis.yaml
 
 ```
   kubectl get services
+
 ```
 <p align="left">
   <img src="images/imagen3.jpg" alt="Image 3">
