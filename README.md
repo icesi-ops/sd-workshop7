@@ -1,5 +1,7 @@
 # Task manager app 
 
+Daniel Jaraba - Samuel Guerrero  
+
 ## Overview
 This project demonstrates how to containerize an application using Docker and deploy it to a Kubernetes cluster for orchestration. This project is a simple Task Manager application that allows users to create personal tasks and manage them effectively. Users can add, update, delete, and mark tasks as completed.
 
