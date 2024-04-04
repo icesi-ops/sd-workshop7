@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-stack-server
+  namespace: microservice-app-example
+  labels:
+    app: redis-stack-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-stack-server
+  template:
+    metadata:
+      labels:
+        app: redis-stack-server
+    spec:
+      containers:
+        - name: redis-stack-server
+          image: redis/redis-stack-server:latest
+          ports:
+            - containerPort: 6379
