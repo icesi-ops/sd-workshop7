@@ -1,0 +1,221 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-logger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-logger
+  template:
+    metadata:
+      labels:
+        app: redis-logger
+    spec:
+      containers:
+      - name: redis-logger
+        image: "redis:alpine"
+        ports:
+        - containerPort: 6379
+          name: redis-logger
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todos-api
+  template:
+    metadata:
+      labels:
+        app: todos-api
+    spec:
+      containers:
+      - name: todos-api
+        image: alexjr2002/microservices-app-todos-api
+        ports:
+        - containerPort: 8082
+        env:
+        - name: JWT_SECRET
+          value: PRFT
+        - name: REDIS_HOST
+          value: redis-logger-service
+        - name: REDIS_CHANNEL
+          value: log_channel
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-api
+  template:
+    metadata:
+      labels:
+        app: users-api
+    spec:
+      containers:
+      - name: users-api
+        image: alexjr2002/microservices-app-users-api
+        ports:
+        - containerPort: 8083
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-api
+  template:
+    metadata:
+      labels:
+        app: auth-api
+    spec:
+      containers:
+      - name: auth-api
+        image: alexjr2002/microservices-app-auth-api
+        ports:
+        - containerPort: 9000
+        env:
+        - name: USERS_API_ADDRESS
+          value: http://users-api-service:8083
+        - name: JWT_SECRET
+          value: PRFT
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: alexjr2002/microservices-app-frontend
+        ports:
+        - containerPort: 8089
+        env:
+        - name: AUTH_API_ADDRESS
+          value: http://auth-api-service:9000
+        - name: TODOS_API_ADDRESS
+          value: http://todos-api-service:8082
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logger
+  template:
+    metadata:
+      labels:
+        app: logger
+    spec:
+      containers:
+      - name: logger
+        image: alexjr2002/microservices-app-logger
+        env:
+        - name: REDIS_HOST
+          value: redis-logger-service
+        - name: REDIS_CHANNEL
+          value: log_channel
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-logger-service
+spec:
+  selector:
+    app: redis-logger
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-api-service
+spec:
+  selector:
+    app: todos-api
+  ports:
+  - protocol: TCP
+    port: 8082
+    targetPort: 8082
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-api-service
+spec:
+  selector:
+    app: users-api
+  ports:
+  - protocol: TCP
+    port: 8083
+    targetPort: 8083
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-api-service
+spec:
+  selector:
+    app: auth-api
+  ports:
+  - protocol: TCP
+    port: 9000
+    targetPort: 9000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 8089
+    targetPort: 8089
+  type: LoadBalancer
