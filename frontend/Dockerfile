@@ -12,7 +12,7 @@ RUN npm install
 RUN npm run build
 
 ENV PORT=8080
-ENV AUTH_API_ADDRESS=http://authapi:8000
-ENV TODOS_API_ADDRESS=http://todosapi:8082
+ENV AUTH_API_ADDRESS=http://auth-api:8000
+ENV TODOS_API_ADDRESS=http://todos-api:8082
 
 CMD ["npm", "start"]

@@ -18,3 +18,9 @@ spec:
         image: luis486/users-api:latest # Cambia a tu imagen y etiqueta específicas
         ports:
         - containerPort: 8083
+        env:
+        - name: JWT_SECRET
+          value: PRFT
+        - name: SERVER_PORT
+          value: "8083"
+      

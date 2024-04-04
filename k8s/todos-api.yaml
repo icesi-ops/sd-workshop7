@@ -18,3 +18,10 @@ spec:
         image: luis486/todos-api:latest # Cambia a tu imagen y etiqueta específicas
         ports:
         - containerPort: 8082
+        env:
+        - name: PORT
+          value: "8080"
+        - name: AUTH_API_ADDRESS
+          value: http://auth-api:8000
+        - name: TODOS_API_ADDRESS
+          value: http://todos-api:8082
