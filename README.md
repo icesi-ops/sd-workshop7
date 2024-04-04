@@ -1,17 +1,63 @@
-# Microservice App - PRFT Devops Training
+### Workshop 7
+**Universidad ICESI**  
 
-This is the application you are going to use through the whole traninig. This, hopefully, will teach you the fundamentals you need in a real project. You will find a basic TODO application designed with a [microservice architecture](https://microservices.io). Although is a TODO application, it is interesting because the microservices that compose it are written in different programming language or frameworks (Go, Python, Vue, Java, and NodeJS). With this design you will experiment with multiple build tools and environments. 
 
-## Components
-In each folder you can find a more in-depth explanation of each component:
+### Team
 
-1. [Users API](/users-api) is a Spring Boot application. Provides user profiles. At the moment, does not provide full CRUD, just getting a single user and all users.
-2. [Auth API](/auth-api) is a Go application, and provides authorization functionality. Generates [JWT](https://jwt.io/) tokens to be used with other APIs.
-3. [TODOs API](/todos-api) is a NodeJS application, provides CRUD functionality over user's TODO records. Also, it logs "create" and "delete" operations to [Redis](https://redis.io/) queue.
-4. [Log Message Processor](/log-message-processor) is a queue processor written in Python. Its purpose is to read messages from a Redis queue and print them to standard output.
-5. [Frontend](/frontend) Vue application, provides UI.
 
-## Architecture
+* Nicolás Gómez 
+* Luis Murcia
 
-Take a look at the components diagram that describes them and their interactions.
-![microservice-app-example](/arch-img/Microservices.png)
+### Suggested technologies 
+* Docker
+* Kubernetes
+* Redis
+# Code:
+First of all we created a deployment for each microservice needed for this app to work.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: distribuidos  
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: luis486/frontend:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: AUTH_API_ADDRESS
+          value: "http://auth-api:8000"
+        - name: TODOS_API_ADDRESS
+          value: "http://todos-api:8082"
+``` 
+Then, we created a namespace to visualize the microservices
+Finally we apply this code for each yaml file:
+```
+kubectl -n distribuidos apply -f
+```
+
+# Service cluster:
+<img src="assets/Cluster.jpg"><br>
+Here we observe each created server to support the group if microservices that are joint in a cluster
+
+# K8's pods:
+<img src="assets/Pods.jpg"><br>
+Over her we've got the k8's pods where the microservices are running, every one of them with it's replica
+# Working program:
+<img src="assets/Working_program.jpg"><br>
+
+
