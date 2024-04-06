@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
+  namespace: distribuidos  
 spec:  
   selector:
     app: frontend
@@ -16,6 +17,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: auth-api
+  namespace: distribuidos  
 spec:
   selector:
     app: auth-api
@@ -31,6 +33,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: log-message
+  namespace: distribuidos  
 spec:
   selector:
     app: log-message
@@ -46,6 +49,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-queue
+  namespace: distribuidos  
 spec:
   selector:
     app: redis-queue
@@ -61,6 +65,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: todos-api
+  namespace: distribuidos  
 spec:
   selector:
     app: todos-api
@@ -76,6 +81,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: users-api
+  namespace: distribuidos  
 spec:
   selector:
     app: users-api
@@ -91,6 +97,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: zipkin
+  namespace: distribuidos  
 spec:
   selector:
     app: zipkin
