@@ -66,6 +66,7 @@ Here we observe each created server to support the group if microservices that a
 <img src="assets/Pods.jpg"><br>
 Over her we've got the k8's pods where the microservices are running, every one of them with it's replica
 # Working program:
-<img src="assets/Working_program.jpg"><br>
+![image](https://github.com/luis486/sd-workshop7/assets/71047563/f85f3dd9-7487-4dc3-bde2-37ee342b5214)
+
 
 
